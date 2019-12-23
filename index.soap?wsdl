@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:ATMWebSvr" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:ATMWebSvr">
+<types>
+<xsd:schema targetNamespace="urn:ATMWebSvr"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="ErroProcesso">
+  <xsd:sequence>
+   <xsd:element name="Codigo" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="Descricao" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="ValorEsperado" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="ValorInformado" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="ErrosProcesso">
+  <xsd:sequence>
+   <xsd:element name="Erro" type="tns:ErroProcesso" minOccurs="1" maxOccurs="unbounded"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="DadosSeguro">
+  <xsd:sequence>
+   <xsd:element name="NumeroAverbacao" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="CNPJSeguradora" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="NomeSeguradora" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="NumApolice" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="TpMov" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="TpDDR" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="ValorAverbado" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="RamoAverbado" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="SuccessProcesso">
+  <xsd:sequence>
+   <xsd:element name="dhAverbacao" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="Protocolo" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="DadosSeguro" type="tns:DadosSeguro" minOccurs="0" maxOccurs="unbounded"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="SuccessProcessoMDFe">
+  <xsd:sequence>
+   <xsd:element name="dhChancela" type="xsd:dateTime" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="Protocolo" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="InfoProcesso">
+  <xsd:sequence>
+   <xsd:element name="Codigo" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="Descricao" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="InfosProcesso">
+  <xsd:sequence>
+   <xsd:element name="Info" type="tns:InfoProcesso" minOccurs="1" maxOccurs="unbounded"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="Retorno">
+  <xsd:sequence>
+   <xsd:element name="Numero" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="Serie" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="Filial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="CNPJCli" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="TpDoc" type="xsd:integer" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="InfAdic" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="Erros" type="tns:ErrosProcesso" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="Averbado" type="tns:SuccessProcesso" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="Infos" type="tns:InfosProcesso" minOccurs="0" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+ <xsd:complexType name="RetornoMDFe">
+  <xsd:sequence>
+   <xsd:element name="Numero" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="Serie" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="Filial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   <xsd:element name="Erros" type="tns:ErrosProcesso" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="Declarado" type="tns:SuccessProcessoMDFe" minOccurs="0" maxOccurs="1"/>
+   <xsd:element name="Infos" type="tns:InfosProcesso" minOccurs="0" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:schema>
+</types>
+<message name="averbaCTeRequest">
+  <part name="usuario" type="xsd:string" />
+  <part name="senha" type="xsd:string" />
+  <part name="codatm" type="xsd:string" />
+  <part name="xmlCTe" type="xsd:string" /></message>
+<message name="averbaCTeResponse">
+  <part name="Response" type="tns:Retorno" /></message>
+<message name="averbaNFeRequest">
+  <part name="usuario" type="xsd:string" />
+  <part name="senha" type="xsd:string" />
+  <part name="codatm" type="xsd:string" />
+  <part name="xmlNFe" type="xsd:string" /></message>
+<message name="averbaNFeResponse">
+  <part name="Response" type="tns:Retorno" /></message>
+<message name="declaraMDFeRequest">
+  <part name="usuario" type="xsd:string" />
+  <part name="senha" type="xsd:string" />
+  <part name="codatm" type="xsd:string" />
+  <part name="xmlMDFe" type="xsd:string" /></message>
+<message name="declaraMDFeResponse">
+  <part name="Response" type="tns:RetornoMDFe" /></message>
+<message name="AddBackMailRequest">
+  <part name="usuario" type="xsd:string" />
+  <part name="senha" type="xsd:string" />
+  <part name="codatm" type="xsd:string" />
+  <part name="aplicacao" type="xsd:string" />
+  <part name="assunto" type="xsd:string" />
+  <part name="remetentes" type="xsd:string" />
+  <part name="destinatarios" type="xsd:string" />
+  <part name="corpo" type="xsd:string" />
+  <part name="chave" type="xsd:string" />
+  <part name="chaveresp" type="xsd:string" /></message>
+<message name="AddBackMailResponse">
+  <part name="return" type="xsd:string" /></message>
+<portType name="ATMWebSvrPortType">
+  <operation name="averbaCTe">
+    <documentation>Interface de averbação eletrônica AT&amp;M para CTe</documentation>
+    <input message="tns:averbaCTeRequest"/>
+    <output message="tns:averbaCTeResponse"/>
+  </operation>
+  <operation name="averbaNFe">
+    <documentation>Interface de averbação eletrônica AT&amp;M para NFe</documentation>
+    <input message="tns:averbaNFeRequest"/>
+    <output message="tns:averbaNFeResponse"/>
+  </operation>
+  <operation name="declaraMDFe">
+    <documentation>Interface de declaração do MDFe para AT&amp;M</documentation>
+    <input message="tns:declaraMDFeRequest"/>
+    <output message="tns:declaraMDFeResponse"/>
+  </operation>
+  <operation name="AddBackMail">
+    <documentation>Serviço de envio de emails para aplicações automatizadas</documentation>
+    <input message="tns:AddBackMailRequest"/>
+    <output message="tns:AddBackMailResponse"/>
+  </operation>
+</portType>
+<binding name="ATMWebSvrBinding" type="tns:ATMWebSvrPortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="averbaCTe">
+    <soap:operation soapAction="urn:ATMWebSvr#averbaCTe" style="rpc"/>
+    <input><soap:body use="literal" namespace="urn:ATMWebSvr"/></input>
+    <output><soap:body use="literal" namespace="urn:ATMWebSvr"/></output>
+  </operation>
+  <operation name="averbaNFe">
+    <soap:operation soapAction="urn:ATMWebSvr#averbaNFe" style="rpc"/>
+    <input><soap:body use="literal" namespace="urn:ATMWebSvr"/></input>
+    <output><soap:body use="literal" namespace="urn:ATMWebSvr"/></output>
+  </operation>
+  <operation name="declaraMDFe">
+    <soap:operation soapAction="urn:ATMWebSvr#declaraMDFe" style="rpc"/>
+    <input><soap:body use="literal" namespace="urn:ATMWebSvr"/></input>
+    <output><soap:body use="literal" namespace="urn:ATMWebSvr"/></output>
+  </operation>
+  <operation name="AddBackMail">
+    <soap:operation soapAction="urn:ATMWebSvr#AddBackMail" style="rpc"/>
+    <input><soap:body use="literal" namespace="urn:ATMWebSvr"/></input>
+    <output><soap:body use="literal" namespace="urn:ATMWebSvr"/></output>
+  </operation>
+</binding>
+<service name="ATMWebSvr">
+  <port name="ATMWebSvrPort" binding="tns:ATMWebSvrBinding">
+    <soap:address location="http://webserver.averba.com.br/20/index.soap"/>
+  </port>
+</service>
+</definitions>
