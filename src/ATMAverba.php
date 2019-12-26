@@ -115,7 +115,7 @@ class ATMAverba extends Base implements ATMAverbaInterface
             }
 
             $params = [
-                'usuari' => $this->getUser(),
+                'usuario' => $this->getUser(),
                 'senha' => $this->getPassword(),
                 'codatm' => $this->getCod(),
                 'xmlCTe' => $xml,

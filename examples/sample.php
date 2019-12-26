@@ -4,7 +4,7 @@ require '../vendor/autoload.php';
 
 echo '<pre>';
 $averba = new \Paseto\ATMAverba();
-$result = $averba->setUser('WS')
+$result = $averba->setUser('??')
     ->setPassword('??')
     ->setCod('??')
     ->setXml('43191202633114000102570010000100121191210019-cte.xml')
