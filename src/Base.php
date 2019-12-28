@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Paseto;
 
 use DOMDocument;
+use phpDocumentor\Reflection\Types\Boolean;
 
 const WSDL = 'http://webserver.averba.com.br/20/index.soap?wsdl';
 
@@ -13,6 +14,17 @@ abstract class Base
     private $errors;
     private $request;
     private $response;
+
+    /**
+     * Response
+     * @var
+     */
+    private $resultStatus;
+    private $resultStatusCode;
+    private $resultStatusMessage;
+    private $resultProtocol;
+    private $resultProtocolDate;
+    private $method;
 
     /**
      * @return mixed
@@ -63,6 +75,114 @@ abstract class Base
     public function setRequest($request)
     {
         $this->request = $request;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getResultStatus(): bool
+    {
+        return $this->resultStatus;
+    }
+
+    /**
+     * @param bool $resultStatus
+     * @return Base
+     */
+    public function setResultStatus(bool $resultStatus)
+    {
+        $this->resultStatus = $resultStatus;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResultStatusCode()
+    {
+        return $this->resultStatusCode;
+    }
+
+    /**
+     * @param mixed $resultStatusCode
+     * @return Base
+     */
+    public function setResultStatusCode($resultStatusCode)
+    {
+        $this->resultStatusCode = $resultStatusCode;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResultStatusMessage()
+    {
+        return $this->resultStatusMessage;
+    }
+
+    /**
+     * @param mixed $resultStatusMessage
+     * @return Base
+     */
+    public function setResultStatusMessage($resultStatusMessage)
+    {
+        $this->resultStatusMessage = $resultStatusMessage;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResultProtocol()
+    {
+        return $this->resultProtocol;
+    }
+
+    /**
+     * @param mixed $resultProtocol
+     * @return Base
+     */
+    public function setResultProtocol($resultProtocol)
+    {
+        $this->resultProtocol = $resultProtocol;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getResultProtocolDate():\DateTime
+    {
+        return $this->resultProtocolDate;
+    }
+
+    /**
+     * @param \DateTime $resultProtocolDate
+     * @return Base
+     */
+    public function setResultProtocolDate(\DateTime $resultProtocolDate)
+    {
+        $this->resultProtocolDate = $resultProtocolDate;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod():string 
+    {
+        return $this->method;
+    }
+
+    /**
+     * @param string $method
+     * @return Base
+     */
+    public function setMethod(string $method)
+    {
+        $this->method = $method;
         return $this;
     }
 

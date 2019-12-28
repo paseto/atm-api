@@ -84,12 +84,18 @@ class ATMAverba extends Base implements ATMAverbaInterface
         return $this;
     }
 
-
     public function averbaCTe()
     {
         $std = new \stdClass();
         $std->method = 'averbaCTe';
-        return $this->send($std);
+        $this->send($std);
+    }
+
+    public function declaraMDFe()
+    {
+        $std = new \stdClass();
+        $std->method = 'declaraMDFe';
+        $this->send($std);
     }
 
     /**
@@ -109,7 +115,7 @@ class ATMAverba extends Base implements ATMAverbaInterface
                 $this->setErrors('Arquivo XML inválido.');
                 return false;
             }
-            if (empty($this->getUser()) || empty($this->getPassword()) || empty($this->getCod())){
+            if (empty($this->getUser()) || empty($this->getPassword()) || empty($this->getCod())) {
                 $this->setErrors('Todos os parâmetros são obrigatórios.');
                 return false;
             }
@@ -130,6 +136,22 @@ class ATMAverba extends Base implements ATMAverbaInterface
             $std->response = $response;
             $std->object = $this->readReturn('Response', $response);
             $this->setResponse($std);
+
+            //Build standard response
+            $this->setMethod($stdClass->method);
+            if (isset($std->object->Erros->Erro)) {
+                $this->setResultStatus(false);
+                $this->setResultStatusCode($std->object->Erros->Erro->Codigo);
+                $this->setResultStatusMessage($std->object->Erros->Erro->Descricao);
+            }else{
+                $this->setResultStatus(true);
+                if (isset($std->object->Infos->Info)) {
+                    $this->setResultStatusCode($std->object->Infos->Info->Codigo);
+                    $this->setResultStatusMessage($std->object->Infos->Info->Descricao);
+                }
+                $this->setResultProtocol($std->object->Averbado->Protocolo);
+                $this->setResultProtocolDate($std->object->Averbado->dhAverbacao);
+            }
             return true;
         } catch (\Exception $e) {
             $this->setErrors($e->getMessage());
