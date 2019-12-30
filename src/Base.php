@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Paseto;
 
 use DOMDocument;
-use phpDocumentor\Reflection\Types\Boolean;
 
+//const WSDL = 'http://homologaws.averba.com.br/20/index.soap?wsdl';
 const WSDL = 'http://webserver.averba.com.br/20/index.soap?wsdl';
 
 abstract class Base
@@ -153,7 +153,7 @@ abstract class Base
     /**
      * @return \DateTime
      */
-    public function getResultProtocolDate():\DateTime
+    public function getResultProtocolDate()
     {
         return $this->resultProtocolDate;
     }
@@ -162,7 +162,7 @@ abstract class Base
      * @param \DateTime $resultProtocolDate
      * @return Base
      */
-    public function setResultProtocolDate(\DateTime $resultProtocolDate)
+    public function setResultProtocolDate($resultProtocolDate)
     {
         $this->resultProtocolDate = $resultProtocolDate;
         return $this;

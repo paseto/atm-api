@@ -88,6 +88,7 @@ class ATMAverba extends Base implements ATMAverbaInterface
     {
         $std = new \stdClass();
         $std->method = 'averbaCTe';
+        $std->arrayParam = 'xmlCTe';
         $this->send($std);
     }
 
@@ -95,6 +96,7 @@ class ATMAverba extends Base implements ATMAverbaInterface
     {
         $std = new \stdClass();
         $std->method = 'declaraMDFe';
+        $std->arrayParam = 'xmlMDFe';
         $this->send($std);
     }
 
@@ -124,7 +126,7 @@ class ATMAverba extends Base implements ATMAverbaInterface
                 'usuario' => $this->getUser(),
                 'senha' => $this->getPassword(),
                 'codatm' => $this->getCod(),
-                'xmlCTe' => $xml,
+                $stdClass->arrayParam => $xml,
             ];
 
             $client->call($stdClass->method, $params);
@@ -143,7 +145,7 @@ class ATMAverba extends Base implements ATMAverbaInterface
                 $this->setResultStatus(false);
                 $this->setResultStatusCode($std->object->Erros->Erro->Codigo);
                 $this->setResultStatusMessage($std->object->Erros->Erro->Descricao);
-            }else{
+            } else {
                 $this->setResultStatus(true);
                 if (isset($std->object->Infos->Info)) {
                     $this->setResultStatusCode($std->object->Infos->Info->Codigo);
