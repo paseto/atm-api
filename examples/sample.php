@@ -4,15 +4,12 @@ require '../vendor/autoload.php';
 
 echo '<pre>';
 $averba = new \Paseto\ATMAverba();
-$result = $averba->setUser('??')
-    ->setPassword('??')
-    ->setCod('??')
-    ->setXml('43191202633114000102570010000100121191210019-cte.xml')
+$result = $averba->setUser('WS')
+    ->setPassword('?')
+    ->setCod('?')
+//    ->setXml('43191202633114000102570010000100121191210019-cte.xml')
     ->averbaCTe();
 
-if ($result == false) {
-    echo $averba->getErrors();
-} else {
     $response = $averba->getResponse();
 
     echo '<pre>';
@@ -24,4 +21,4 @@ if ($result == false) {
         echo $response->object->cProtocolo;
         echo $response->object->listaMensagem->cStatus;
     }
-}
+//}

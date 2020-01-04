@@ -106,6 +106,7 @@ class ATMAverba extends Base implements ATMAverbaInterface
      */
     private function send(\stdClass $stdClass): bool
     {
+        $this->setResultStatus(false);
         try {
             $client = new Client(WSDL, ["soap_version" => SOAP_1_1]);
             if (!is_file($this->getXml())) {
@@ -150,9 +151,17 @@ class ATMAverba extends Base implements ATMAverbaInterface
                 if (isset($std->object->Infos->Info)) {
                     $this->setResultStatusCode($std->object->Infos->Info->Codigo);
                     $this->setResultStatusMessage($std->object->Infos->Info->Descricao);
+                } else {
+                    $this->setResultStatusCode(100);
+                    $this->setResultStatusMessage('Documento Averbado');
                 }
-                $this->setResultProtocol($std->object->Averbado->Protocolo);
-                $this->setResultProtocolDate($std->object->Averbado->dhAverbacao);
+                if ($stdClass->method == 'declaraMDFe') {
+                    $this->setResultProtocol($std->object->Declarado->Protocolo);
+                    $this->setResultProtocolDate($std->object->Declarado->dhChancela);
+                } else {
+                    $this->setResultProtocol($std->object->Averbado->Protocolo);
+                    $this->setResultProtocolDate($std->object->Averbado->dhAverbacao);
+                }
             }
             return true;
         } catch (\Exception $e) {
