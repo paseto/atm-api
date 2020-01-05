@@ -104,7 +104,7 @@ class ATMAverba extends Base implements ATMAverbaInterface
      * @param \stdClass $stdClass
      * @return bool
      */
-    private function send(\stdClass $stdClass): bool
+    private function send(\stdClass $stdClass)
     {
         $this->setResultStatus(false);
         try {
