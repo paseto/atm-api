@@ -5,7 +5,7 @@ namespace Paseto;
 
 use Zend\Soap\Client;
 
-class ATMAverba extends Base implements ATMAverbaInterface
+class ATMAverba extends BaseATM implements ATMAverbaInterface
 {
     private $user;
     private $password;

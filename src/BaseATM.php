@@ -8,7 +8,7 @@ use DOMDocument;
 //const WSDL = 'http://homologaws.averba.com.br/20/index.soap?wsdl';
 const WSDL = 'http://webserver.averba.com.br/20/index.soap?wsdl';
 
-abstract class Base
+abstract class BaseATM
 {
 
     private $errors;
@@ -52,7 +52,7 @@ abstract class Base
 
     /**
      * @param mixed $response
-     * @return Base
+     * @return BaseATM
      */
     public function setResponse($response)
     {
@@ -70,7 +70,7 @@ abstract class Base
 
     /**
      * @param mixed $request
-     * @return Base
+     * @return BaseATM
      */
     public function setRequest($request)
     {
@@ -88,7 +88,7 @@ abstract class Base
 
     /**
      * @param bool $resultStatus
-     * @return Base
+     * @return BaseATM
      */
     public function setResultStatus(bool $resultStatus)
     {
@@ -106,7 +106,7 @@ abstract class Base
 
     /**
      * @param mixed $resultStatusCode
-     * @return Base
+     * @return BaseATM
      */
     public function setResultStatusCode($resultStatusCode)
     {
@@ -124,7 +124,7 @@ abstract class Base
 
     /**
      * @param mixed $resultStatusMessage
-     * @return Base
+     * @return BaseATM
      */
     public function setResultStatusMessage($resultStatusMessage)
     {
@@ -142,7 +142,7 @@ abstract class Base
 
     /**
      * @param mixed $resultProtocol
-     * @return Base
+     * @return BaseATM
      */
     public function setResultProtocol($resultProtocol)
     {
@@ -160,7 +160,7 @@ abstract class Base
 
     /**
      * @param \DateTime $resultProtocolDate
-     * @return Base
+     * @return BaseATM
      */
     public function setResultProtocolDate($resultProtocolDate)
     {
@@ -178,7 +178,7 @@ abstract class Base
 
     /**
      * @param string $method
-     * @return Base
+     * @return BaseATM
      */
     public function setMethod(string $method)
     {
