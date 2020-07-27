@@ -92,7 +92,7 @@ class ATMAverba extends BaseATM implements ATMAverbaInterface
         $this->send($std);
     }
 
-    public function declaraMDFe()
+    public function averbaMDFe()
     {
         $std = new \stdClass();
         $std->method = 'declaraMDFe';

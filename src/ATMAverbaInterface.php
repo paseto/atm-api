@@ -6,5 +6,5 @@ interface ATMAverbaInterface
 {
     public function averbaCTe();
 
-    public function declaraMDFe();
+    public function averbaMDFe();
 }
