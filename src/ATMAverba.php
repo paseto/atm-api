@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Paseto;
 
-use Zend\Soap\Client;
+use Laminas\Soap\Client;
 
 class ATMAverba extends BaseATM implements ATMAverbaInterface
 {
@@ -169,5 +169,4 @@ class ATMAverba extends BaseATM implements ATMAverbaInterface
             return false;
         }
     }
-
 }
